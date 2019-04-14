@@ -1,4 +1,4 @@
-class PomodorosController < ApplicationController
+class PomodorosController < OpenReadController
   before_action :set_pomodoro, only: [:show, :update, :destroy]
 
   # GET /pomodoros
@@ -15,7 +15,7 @@ class PomodorosController < ApplicationController
 
   # POST /pomodoros
   def create
-    @pomodoro = Pomodoro.new(pomodoro_params)
+    @pomodoro = current_user.pomodoros.new(pomodoro_params)
 
     if @pomodoro.save
       render json: @pomodoro, status: :created, location: @pomodoro
