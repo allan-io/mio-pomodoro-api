@@ -3,6 +3,18 @@
 class UsersController < OpenReadController
   skip_before_action :authenticate, only: %i[signup signin]
 
+  # GET './users/show'
+  def show
+    @users = User.all
+    render json: @users
+  end
+
+  # GET './users/index'
+  def index
+    @users = User.find(params[:id])
+    render json: @users
+  end
+
   # POST '/sign-up'
   def signup
     user = User.create(user_creds)
