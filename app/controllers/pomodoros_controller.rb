@@ -1,4 +1,4 @@
-class PomodorosController < OpenReadController
+class PomodorosController < ProtectedController
   before_action :set_pomodoro, only: [:show, :update, :destroy]
 
   # GET /pomodoros
@@ -42,7 +42,7 @@ class PomodorosController < OpenReadController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_pomodoro
-    @pomodoro = Pomodoro.find(params[:id])
+    @pomodoro = current_user.pomodoros.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
